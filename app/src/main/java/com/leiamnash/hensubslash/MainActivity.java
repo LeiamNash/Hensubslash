@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 webview.setOnLongClickListener(ignore -> true);
 webview.setLongClickable(false);
 webview.getSettings().setJavaScriptEnabled(true);
+webview.getSettings().setMediaPlaybackRequiresUserGesture(false);
 webview.getSettings().setDomStorageEnabled(true);
 webview.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
         webview.loadUrl(myurl);
@@ -155,9 +156,9 @@ webview.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
 webview.setOnLongClickListener(ignore -> true);
 webview.setLongClickable(false);
 webview.getSettings().setJavaScriptEnabled(true);
+webview.getSettings().setMediaPlaybackRequiresUserGesture(false);
 webview.getSettings().setDomStorageEnabled(true);
 webview.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
         webview.loadUrl(myurl);
     }
 }
-
