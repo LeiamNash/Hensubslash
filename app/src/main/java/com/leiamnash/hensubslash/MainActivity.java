@@ -30,6 +30,38 @@ public class MainActivity extends AppCompatActivity {
         spinner = (ProgressBar)findViewById(R.id.progressBar1);
         webview.setWebViewClient(new CustomWebViewClient());
 
+webview.setWebChromeClient(new WebChromeClient() {
+ private View mCustomView;
+ private CustomViewCallback mCustomViewCallback;
+ protected FrameLayout mFullscreenContainer;
+    
+    @Override
+    public void onShowCustomView(View view, CustomViewCallback callback) {
+    if (mCustomView != null) {
+        callback.onCustomViewHidden();
+            return;
+    }
+        mCustomView = view;
+        mCustomViewCallback = callback;
+        mFullscreenContainer = new FrameLayout(MainActivity.this);
+        mFullscreenContainer.addView(view, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        ViewGroup decor = (ViewGroup) getWindow().getDecorView();
+    decor.addView(mFullscreenContainer);
+        webview.setVisibility(View.GONE);
+getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+}
+    @Override
+    public void onHideCustomView() {
+     if (mCustomView == null) return;
+        ViewGroup decor = (ViewGroup) getWindow().getDecorView();
+        decor.removeView(mFullscreenContainer);
+        mFullscreenContainer = null;
+        mCustomView = null;
+        mCustomViewCallback.onCustomViewHidden();
+        webview.setVisibility(View.VISIBLE);
+getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+ }
+});
 webview.setOnLongClickListener(ignore -> true);
 webview.setLongClickable(false);
 webview.getSettings().setJavaScriptEnabled(true);
@@ -153,6 +185,38 @@ webview.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
         spinner = (ProgressBar)findViewById(R.id.progressBar1);
         webview.setWebViewClient(new CustomWebViewClient());
 
+webview.setWebChromeClient(new WebChromeClient() {
+ private View mCustomView;
+ private CustomViewCallback mCustomViewCallback;
+ protected FrameLayout mFullscreenContainer;
+    
+    @Override
+    public void onShowCustomView(View view, CustomViewCallback callback) {
+    if (mCustomView != null) {
+        callback.onCustomViewHidden();
+            return;
+    }
+        mCustomView = view;
+        mCustomViewCallback = callback;
+        mFullscreenContainer = new FrameLayout(MainActivity.this);
+        mFullscreenContainer.addView(view, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        ViewGroup decor = (ViewGroup) getWindow().getDecorView();
+    decor.addView(mFullscreenContainer);
+        webview.setVisibility(View.GONE);
+getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+}
+    @Override
+    public void onHideCustomView() {
+     if (mCustomView == null) return;
+        ViewGroup decor = (ViewGroup) getWindow().getDecorView();
+        decor.removeView(mFullscreenContainer);
+        mFullscreenContainer = null;
+        mCustomView = null;
+        mCustomViewCallback.onCustomViewHidden();
+        webview.setVisibility(View.VISIBLE);
+getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+ }
+});
 webview.setOnLongClickListener(ignore -> true);
 webview.setLongClickable(false);
 webview.getSettings().setJavaScriptEnabled(true);
