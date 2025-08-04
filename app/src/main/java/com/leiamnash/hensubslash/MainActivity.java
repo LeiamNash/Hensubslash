@@ -1,6 +1,7 @@
 package com.leiamnash.hensubslash;
 
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
 import android.net.http.SslError;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
                 webview.setVisibility(View.GONE);
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
             }
 
             @Override
@@ -75,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
                 webview.setVisibility(View.VISIBLE);
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
             }
         });
 
@@ -83,6 +86,12 @@ public class MainActivity extends AppCompatActivity {
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setMediaPlaybackRequiresUserGesture(false);
         webview.getSettings().setDomStorageEnabled(true);
+        webview.getSettings().setAllowFileAccess(true);
+        webview.getSettings().setAllowContentAccess(true);
+        webview.getSettings().setAllowUniversalAccessFromFileURLs(true);
+        webview.getSettings().setAllowFileAccessFromFileURLs(true);
+        webview.getSettings().setMediaPlaybackRequiresUserGesture(false);
+        webview.getSettings().setUserAgentString(webview.getSettings().getUserAgentString() + " CastSupport");
         webview.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
         webview.loadUrl(myurl);
     }
